@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: rgb(213, 169, 213);
+}
+QPushButton{
+	background-color: rgb(222, 243, 250);
+	border-radius: 10px;
+	border-color: rgb(0,0,0);
+	border-width : 2px;
+	font: 75 12pt &quot;Ubuntu Sans Bold&quot;;
+}
+QLineEdit{
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+}</string>
+  </property>
+  <widget class="QPushButton" name="boton_nuevo">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>20</y>
+     <width>200</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Nueva Señal</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="titulo">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>500</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Visualizador de Archivos Mat</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_salir">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>540</y>
+     <width>60</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(213, 206, 248);</string>
+   </property>
+   <property name="text">
+    <string>Salir </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_original">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>200</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(244, 139, 146);</string>
+   </property>
+   <property name="text">
+    <string>Ver Señal Original</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_promedio">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>200</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(244, 139, 146);</string>
+   </property>
+   <property name="text">
+    <string>Ver Señal Promedio</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_proyeccion">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>70</y>
+     <width>200</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(244, 139, 146);</string>
+   </property>
+   <property name="text">
+    <string>Ver Proyección 2D</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_siguiente">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>540</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(219, 250, 125);</string>
+   </property>
+   <property name="text">
+    <string>Siguiente ▶</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_anterior">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>540</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Sans Bold</family>
+     <pointsize>12</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(219, 250, 125);</string>
+   </property>
+   <property name="text">
+    <string>◀ Anterior</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>761</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="layout"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

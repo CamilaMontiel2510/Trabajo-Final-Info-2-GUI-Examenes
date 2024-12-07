@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="prefijoNuevo">
+    <file>Escudo-UdeA.svg.png</file>
+  </qresource>
+</RCC>
