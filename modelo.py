@@ -33,3 +33,64 @@ class Sistema:
 
         if data is not None:
             self.asignarDatos(self, data)
+ # USUARIO
+
+    def verificarUsuario(self, nombre_usuario, contrasena):
+
+        busca_usuario = f"SELECT * FROM usuarios WHERE nombre_usuario='{nombre_usuario}'"
+
+        self.__cursor.execute(busca_usuario)
+
+        resultados = self.__cursor.fetchall()
+
+        if len(resultados) == 0:
+
+            return("Usuario no encontrado")
+
+        else:
+
+            busca_contrasena = f"SELECT nombre FROM usuarios WHERE nombre_usuario='{nombre_usuario}' AND contrasena='{contrasena}'"
+
+            self.__cursor.execute(busca_contrasena)
+
+            resultados = self.__cursor.fetchall()
+
+            if len(resultados) == 0:
+
+                return ("Contraseña errónea")
+
+            else:
+
+                self.__nombre_usuario = resultados[0][0].split()[0]
+            
+                return None
+            
+    def obtenerNombre(self):
+
+        return self.__nombre_usuario
+            
+    def crearUsuario(self, nombre_usuario, contrasena, nombre):
+
+        busca_usuario = f"SELECT * FROM usuarios WHERE nombre_usuario='{nombre_usuario}'"
+
+        self.__cursor.execute(busca_usuario)
+
+        resultados = self.__cursor.fetchall()
+
+        if len(resultados) != 0:
+
+            return("Usuario ya existente")
+
+        else:
+
+            crear_usuario = f"""
+            INSERT INTO usuarios (nombre_usuario, contrasena, nombre) VALUES
+            ('{nombre_usuario}', '{contrasena}', '{nombre}')"""
+
+            self.__cursor.execute(crear_usuario)
+
+            # Para que se confirmen los datos
+            
+            self.__cnx.commit()
+
+            return("Usuario creado exitosamente")
