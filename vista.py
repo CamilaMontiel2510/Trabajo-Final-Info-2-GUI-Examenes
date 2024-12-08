@@ -17,3 +17,30 @@ class VentanaPrincipal(QMainWindow):
 
         self.boton_ingresar.clicked.connect(self.iniciarSesion)
         self.boton_ingresar.setAutoDefault(True)
+        
+def asignarControlador(self, controlador):
+
+        self.__controlador = controlador
+    
+def iniciarSesion(self):
+
+        usuario = self.nombre_usuario_campo.text()
+        contrasena = self.contrasena_campo.text()
+        # esta informacion se pasa al controlador
+        resultado = self.__controlador.verificarUsuario(usuario, contrasena)
+        msg = QMessageBox(self)
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Resultado")
+
+        if resultado is None:
+
+            self.verMenu()
+
+        else:
+
+            msg.setText(resultado)
+            msg.show()
+            self.nombre_usuario_campo.clear()
+            self.contrasena_campo.clear()
+
+
