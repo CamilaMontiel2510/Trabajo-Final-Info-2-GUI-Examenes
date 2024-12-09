@@ -94,3 +94,30 @@ class Sistema:
             self.__cnx.commit()
 
             return("Usuario creado exitosamente")
+            
+    def asignarDatos(self, data):
+
+        self.__data = data
+        self.__sensores = data.shape[0]
+        self.__etapas = data.shape[1]
+        self.__pruebas = data.shape[2]
+
+    def mostrarOriginal(self):
+
+        return self.__data[:,:,0]
+        
+    def mostrarPromedio(self):
+
+        x = np.mean(self.__data, 0)
+
+        return np.transpose(x)
+    
+    def mostrarProyeccion2D(self):
+
+        return np.reshape(self.__data, (self.__sensores, self.__etapas * self.__pruebas), order='F')
+
+    
+
+    
+    
+    
