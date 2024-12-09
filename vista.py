@@ -61,5 +61,15 @@ def iniciarSesion(self):
             msg.show()
             self.nombre_usuario_campo.clear()
             self.contrasena_campo.clear()
+            
+def verMenu(self):
+
+        self.nombre_usuario_campo.clear()
+        self.contrasena_campo.clear()
+        ventana_nueva = VentanaMenu(self)
+        ventana_nueva.asignarControlador(self.__controlador)
+        ventana_nueva.agregarNombre()
+        self.hide()
+        ventana_nueva.show()
 
 
