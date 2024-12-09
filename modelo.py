@@ -116,7 +116,31 @@ class Sistema:
 
         return np.reshape(self.__data, (self.__sensores, self.__etapas * self.__pruebas), order='F')
 
+
+
+
+
+
     
+
+    def cargarDicom(self, i):
+
+        self.__dicom = dc.dcmread(i)
+
+        # Obtenemos el mapa de pixeles
+
+        self.__dicom_array = self.__dicom.pixel_array
+
+        fecha_paciente = self.__dicom.PatientBirthDate[:4] + '-' + self.__dicom.PatientBirthDate[4:6] + '-' + self.__dicom.PatientBirthDate[6:]
+
+        self.__datos_paciente = f'Nombre: {self.__dicom.PatientName}    Fecha de Nacimiento: {fecha_paciente}    Género: {self.__dicom.PatientSex}    Peso: {self.__dicom.PatientWeight}'
+
+        return self.__dicom_array
+    
+    def obtenerDatosPaciente(self):
+
+        return self.__datos_paciente
+        
 
     
     
