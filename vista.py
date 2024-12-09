@@ -72,6 +72,24 @@ def verMenu(self):
         self.hide()
         ventana_nueva.show()
     
+class VentanaMenu(QDialog): 
+
+    def __init__(self, ppal=None):
+
+        super().__init__(ppal)
+        loadUi("Vistas/vista_menu_principal.ui", self)
+        self.__ventanaPadre = ppal
+        self.__resultado_lista = []
+        self.__controlador = None
+        self.setup()
+
+    def setup(self):
+
+        self.boton_mat.clicked.connect(self.verMat)
+        self.boton_dicom.clicked.connect(self.verDicom)
+        self.boton_usuario.clicked.connect(self.crearUsuario)
+        self.boton_salir.clicked.connect(self.salir)
+
 class VentanaCrearUsuario(QDialog):
 
     def __init__(self, ppal=None):
