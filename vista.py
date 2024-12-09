@@ -173,4 +173,32 @@ class VentanaCrearUsuario(QDialog):
         self.hide()
         self.__ventanaPadre.show()
 
+%...
 
+
+
+
+
+
+
+class graficoDicom(FigureCanvas):
+
+    def __init__(self, parent= None, width=32, height=30, dpi=100):
+
+        self.fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = self.fig.add_subplot(111)
+        self.axes.axis("off")        
+        FigureCanvas.__init__(self, self.fig)
+    
+    def graficarImagen(self, datos):
+
+        self.axes.clear()
+        self.axes.axis("off")
+        self.axes.imshow(datos)
+        self.axes.figure.canvas.draw()
+
+    def limpiarImagen(self):
+
+        self.axes.clear()
+        self.axes.axis("off")
+        self.axes.figure.canvas.draw()
