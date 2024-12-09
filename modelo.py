@@ -141,7 +141,27 @@ class Sistema:
 
         return self.__datos_paciente
         
+     def obtenerImagenContrastada(self):
 
+        imagen_normalizada = self.__dicom_array/np.max(self.__dicom_array)
+
+        imagen_contrastada = np.clip(imagen_normalizada * 1.5, 0, 1)
+
+        return imagen_contrastada
+    
+    def obtenerImagenSuavizada(self):
+
+        imagen_suavizada = gaussian_filter(self.__dicom_array, sigma=3)
+
+        return imagen_suavizada
+    
+    def obtenerImagenBordes(self):
+
+        return filters.sobel(self.__dicom_array)
+    
+    def obtenerImagenOriginal(self):
+
+        return self.__dicom_array
     
     
     
