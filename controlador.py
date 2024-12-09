@@ -73,3 +73,21 @@ class Coordinador(object):
     def obtenerImagenOriginal(self):
 
         return self.__mi_sistema.obtenerImagenOriginal()
+    
+class Main():
+    
+    def __init__(self):
+        
+        self.__app = QApplication(sys.argv)
+        self.__mi_vista = VentanaPrincipal()
+        self.__mi_sistema = Sistema()  
+        #hacemos enlaces entre las partes
+        self.__mi_controlador = Coordinador(self.__mi_vista, self.__mi_sistema)
+        self.__mi_vista.asignarControlador(self.__mi_controlador)
+           
+    def main(self):
+        self.__mi_vista.show()
+        sys.exit(self.__app.exec_())
+
+p = Main()
+p.main() 
