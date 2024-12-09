@@ -89,6 +89,39 @@ class VentanaMenu(QDialog):
         self.boton_dicom.clicked.connect(self.verDicom)
         self.boton_usuario.clicked.connect(self.crearUsuario)
         self.boton_salir.clicked.connect(self.salir)
+    def agregarNombre(self):
+
+        self.titulo.setText(f'Bienvenida {self.__controlador.obtenerNombre()}')
+
+    def asignarControlador(self, controlador):
+        
+        self.__controlador = controlador
+
+    def verMat(self):
+
+        ventana_nueva = VistaMat(self)
+        ventana_nueva.asignarControlador(self.__controlador)
+        self.hide()
+        ventana_nueva.show()
+
+    def verDicom(self):
+
+        ventana_nueva = VistaDicom(self)
+        ventana_nueva.asignarControlador(self.__controlador)
+        self.hide()
+        ventana_nueva.show()
+
+    def crearUsuario(self):
+
+        ventana_nueva = VentanaCrearUsuario(self)
+        ventana_nueva.asignarControlador(self.__controlador)
+        self.hide()
+        ventana_nueva.show()
+        
+    def salir(self):
+
+        self.hide()
+        self.__ventanaPadre.show()
 
 class VentanaCrearUsuario(QDialog):
 
