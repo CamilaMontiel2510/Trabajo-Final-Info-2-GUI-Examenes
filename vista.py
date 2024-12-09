@@ -71,5 +71,55 @@ def verMenu(self):
         ventana_nueva.agregarNombre()
         self.hide()
         ventana_nueva.show()
+    
+class VentanaCrearUsuario(QDialog):
+
+    def __init__(self, ppal=None):
+
+        super().__init__(ppal)
+        loadUi("Vistas/vista_crear_usuario.ui", self)
+        self.__ventanaPadre = ppal
+        self.__resultado_lista = []
+        self.setup()
+
+    def setup(self):
+
+        self.boton_crear.clicked.connect(self.crearUsuario)
+        self.boton_salir.clicked.connect(self.salir)
+
+    def asignarControlador(self, c):
+        self.__controlador = c
+
+    def crearUsuario(self):
+
+        usuario = self.nombre_usuario_campo.text()
+        contrasena = self.contrasena_campo.text()
+        nombre = self.nombre_campo.text()
+        
+        resultado = self.__controlador.crearUsuario(usuario, contrasena, nombre)
+        msg = QMessageBox(self)
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Resultado")
+
+        msg.setText(resultado)
+
+        if resultado == 'Usuario creado exitosamente':
+
+            self.hide()
+
+            self.__ventanaPadre.show()
+
+        else:
+
+            msg.show()
+
+            self.nombre_usuario_campo.clear()
+            self.contrasena_campo.clear()
+            self.nombre_campo.clear()
+
+    def salir(self):
+
+        self.hide()
+        self.__ventanaPadre.show()
 
 
