@@ -172,13 +172,27 @@ class VentanaCrearUsuario(QDialog):
 
         self.hide()
         self.__ventanaPadre.show()
+class graficoMat(FigureCanvas):
 
-%...
+    def __init__(self, parent=None, width=4, height=2, dpi=100):
 
+        self.fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = self.fig.add_subplot(111)
+        FigureCanvas.__init__(self, self.fig)
 
+    def graficarSenal(self, datos):
 
+        self.axes.clear()
 
+        for c in range(datos.shape[0]):
 
+            self.axes.plot(datos[c, :] + c * 25)
+
+        self.axes.set_xlabel('Muestras')
+        self.axes.set_ylabel('Voltaje (uV)')
+        self.axes.set_title('Señales EEG')
+
+        self.draw()
 
 
 class graficoDicom(FigureCanvas):
