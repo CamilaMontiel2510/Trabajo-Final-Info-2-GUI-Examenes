@@ -324,3 +324,104 @@ class graficoDicom(FigureCanvas):
         self.axes.clear()
         self.axes.axis("off")
         self.axes.figure.canvas.draw()
+
+class VistaDicom(QDialog):
+
+    def __init__(self, ppal=None):
+
+        super().__init__(ppal)
+        loadUi("Vistas/vista_dicom.ui", self)
+        self.__ventanaPadre = ppal
+        self.setup()
+
+    def asignarControlador(self, controlador):
+
+        self.__controlador = controlador
+
+    def setup(self):
+
+        self.boton_salir.clicked.connect(self.salir)
+        self.boton_nuevo.clicked.connect(self.cargarImagen)
+        self.boton_contraste.clicked.connect(self.obtenerImagenContrastada)
+        self.boton_suavizada.clicked.connect(self.obtenerImagenSuavizada)
+        self.boton_bordes.clicked.connect(self.obtenerImagenBordes)
+        self.boton_original.clicked.connect(self.obtenerImagenOriginal)
+        
+        self.graf = graficoDicom(self, width=8, height=5, dpi=100)
+        self.layout.addWidget(self.graf)
+
+        self.boton_contraste.setEnabled(False)
+        self.boton_suavizada.setEnabled(False)
+        self.boton_bordes.setEnabled(False)
+        self.boton_original.setEnabled(False)
+
+    def salir(self):
+
+        self.hide()
+        self.__ventanaPadre.show()
+    
+    def cargarImagen(self):
+
+        file, _  = QtWidgets.QFileDialog.getOpenFileName(self, "Abrir archivo .dcm", "./Archivos/dcm", "DICOM Files (*.dcm)")
+
+        if file != '':
+
+            self.boton_original.setEnabled(False)
+
+            y = self.__controlador.cargarImagen(file)
+            self.graf.graficarImagen(y)
+
+            self.datos_paciente.setText(self.__controlador.obtenerDatosPaciente())
+
+            self.boton_contraste.setEnabled(True)
+            self.boton_suavizada.setEnabled(True)
+            self.boton_bordes.setEnabled(True)
+            self.boton_original.setEnabled(True)
+
+        else:
+
+            pass
+
+    def obtenerImagenContrastada(self):
+
+        self.boton_contraste.setEnabled(False)
+        self.boton_suavizada.setEnabled(True)
+        self.boton_bordes.setEnabled(True)
+        self.boton_original.setEnabled(True)
+
+        y = self.__controlador.obtenerImagenContrastada()
+
+        self.graf.graficarImagen(y)
+
+    def obtenerImagenSuavizada(self):
+
+        self.boton_contraste.setEnabled(True)
+        self.boton_suavizada.setEnabled(False)
+        self.boton_bordes.setEnabled(True)
+        self.boton_original.setEnabled(True)
+
+        y = self.__controlador.obtenerImagenSuavizada()
+
+        self.graf.graficarImagen(y)
+
+    def obtenerImagenBordes(self):
+
+        self.boton_contraste.setEnabled(True)
+        self.boton_suavizada.setEnabled(True)
+        self.boton_bordes.setEnabled(False)
+        self.boton_original.setEnabled(True)
+
+        y = self.__controlador.obtenerImagenBordes()
+
+        self.graf.graficarImagen(y)
+
+    def obtenerImagenOriginal(self):
+
+        self.boton_contraste.setEnabled(True)
+        self.boton_suavizada.setEnabled(True)
+        self.boton_bordes.setEnabled(True)
+        self.boton_original.setEnabled(False)
+
+        y = self.__controlador.obtenerImagenOriginal()
+
+        self.graf.graficarImagen(y)
