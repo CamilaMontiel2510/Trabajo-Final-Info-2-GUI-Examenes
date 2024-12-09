@@ -193,6 +193,114 @@ class graficoMat(FigureCanvas):
         self.axes.set_title('Señales EEG')
 
         self.draw()
+class VistaMat(QDialog):
+
+    def __init__(self, ppal=None):
+
+        super().__init__(ppal)
+        loadUi("Vistas/vista_mat.ui", self)
+        self.__ventanaPadre = ppal
+        self.__j = 0
+        self.setup()
+        
+    def asignarControlador(self, c):
+
+        self.__controlador = c
+
+    def setup(self):
+
+        self.__campo_grafico = graficoMat(self, width=6, height=4.7, dpi=100)
+        
+        self.layout.addWidget(self.__campo_grafico)
+
+        self.boton_original.setEnabled(False)
+        self.boton_promedio.setEnabled(False)
+        self.boton_proyeccion.setEnabled(False)
+        self.boton_siguiente.setEnabled(False)
+        self.boton_anterior.setEnabled(False)
+
+        self.boton_salir.clicked.connect(self.salir)
+        self.boton_nuevo.clicked.connect(self.cargarArchivo)
+        self.boton_original.clicked.connect(self.mostrarOriginal)
+        self.boton_promedio.clicked.connect(self.mostrarPromedio)
+        self.boton_proyeccion.clicked.connect(self.mostrarProyeccion2D)
+        self.boton_siguiente.clicked.connect(self.mostrarSiguiente)
+        self.boton_anterior.clicked.connect(self.mostrarAnterior)
+
+    def salir(self):
+
+        self.hide()
+        self.__ventanaPadre.show()
+
+    def cargarArchivo(self):
+
+        archivo_cargado, _ = QFileDialog.getOpenFileName(self, "Abrir archivo .mat", "./Archivos/mat", "MAT Files (*.mat)")
+
+        if archivo_cargado != '':
+            
+            #Cargamos los datos
+            data = sio.loadmat(archivo_cargado) # Diccionario
+            data = data["set"]
+            self.__controlador.cargarArchivoMat(data)
+            self.x_min = 0
+            self.x_max = data.shape[1]
+
+            self.boton_original.setEnabled(True)
+            self.boton_promedio.setEnabled(True)
+            self.boton_proyeccion.setEnabled(True)
+            self.boton_siguiente.setEnabled(True)
+            self.boton_anterior.setEnabled(True)
+
+    def mostrarOriginal(self):
+
+        self.__campo_grafico.graficarSenal(self.__controlador.mostrarOriginal())
+        self.boton_siguiente.setEnabled(True)
+        self.boton_anterior.setEnabled(True)
+
+    def mostrarPromedio(self):
+
+        self.__campo_grafico.graficarSenal(self.__controlador.mostrarPromedio())
+        self.boton_siguiente.setEnabled(False)
+        self.boton_anterior.setEnabled(False)
+      
+    def mostrarProyeccion2D(self):
+
+        self.__campo_grafico.graficarSenal(self.__controlador.mostrarProyeccion2D())
+        self.boton_siguiente.setEnabled(False)
+        self.boton_anterior.setEnabled(False)
+
+    def mostrarSiguiente(self):
+
+        p = self.__controlador.obtenerLista()
+
+        if self.__j < p[0]-1:
+
+            self.boton_anterior.setEnabled(True)
+
+            self.__j=self.__j+1
+            self.__campo_grafico.graficarSenal(self.__controlador.mostrarSiguiente(self.__j))
+
+        else:
+
+            self.boton_siguiente.setEnabled(False)
+
+            texto = ("No hay una prueba siguiente")
+            msj = QMessageBox.warning(self, "Alerta", texto,  QMessageBox.Ok, QMessageBox.Cancel)         
+    def mostrarAnterior(self):
+        
+        if self.__j > -1:
+
+            self.boton_siguiente.setEnabled(True)
+
+            self.__j = self.__j-1
+            self.__campo_grafico.graficarSenal(self.__controlador.mostrarAnterior(self.__j))
+
+        else:
+
+            self.boton_anterior.setEnabled(False)
+
+            texto = ("No hay una prueba anterior")
+            msj = QMessageBox.warning(self, "Alerta", texto,  QMessageBox.Ok, QMessageBox.Cancel) 
 
 
 class graficoDicom(FigureCanvas):
