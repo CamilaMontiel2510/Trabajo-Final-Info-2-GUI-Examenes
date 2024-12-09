@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QMainWindow, QDialog, QMessageBox, QFileDialog, QVBo
 import scipy.io as sio
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5.QtGui import QPixmap
+import os
 
 class VentanaPrincipal(QMainWindow):
 
@@ -17,6 +19,23 @@ class VentanaPrincipal(QMainWindow):
 
         self.boton_ingresar.clicked.connect(self.iniciarSesion)
         self.boton_ingresar.setAutoDefault(True)
+
+        ruta_imagen = os.path.abspath('Escudo-UdeA.svg.png')  # Usa la ruta correcta de tu imagen
+        print(f"Ruta de la imagen: {ruta_imagen}")
+
+        if not os.path.exists(ruta_imagen):
+            print("Error: No se encontró la imagen en la ruta especificada")
+            return
+
+        # Cargar la imagen en QPixmap
+        pixmap = QPixmap(ruta_imagen)
+        if pixmap.isNull():
+            print("Error: No se pudo cargar la imagen. Revisa el formato o la ruta.")
+            return
+            
+        self.imagen_label.setPixmap(pixmap)
+        self.imagen_label.setScaledContents(True)
+        print("Imagen cargada correctamente en QLabel.")
         
 def asignarControlador(self, controlador):
 
