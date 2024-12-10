@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{
-	background-color: rgb(213, 169, 213);
+	background-color: rgb(170, 170, 255);
 }
 QPushButton{
 	background-color: rgb(222, 243, 250);
