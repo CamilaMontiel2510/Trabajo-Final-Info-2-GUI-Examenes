@@ -115,21 +115,21 @@ class Sistema:
     def mostrarProyeccion2D(self):
 
         return np.reshape(self.__data, (self.__sensores, self.__etapas * self.__pruebas), order='F')
-
     def mostrarSiguiente(self, i):
 
-            if i < self.__pruebas:
-                return self.__data[:, :, i]
-            else:
-                return None
-            
+        if i < self.__pruebas:
+            return self.__data[:, :, i]
+        else:
+            return None
     def mostrarAnterior(self, i):
 
         return self.__data[:, :, i]
-        
+    
     def obtenerLista(self):
 
         return [self.__pruebas]
+
+
 
     def cargarDicom(self, i):
 
