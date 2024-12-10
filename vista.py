@@ -37,40 +37,40 @@ class VentanaPrincipal(QMainWindow):
         self.imagen_label.setScaledContents(True)
         print("Imagen cargada correctamente en QLabel.")
         
-def asignarControlador(self, controlador):
+    def asignarControlador(self, controlador):
 
-        self.__controlador = controlador
-    
-def iniciarSesion(self):
+            self.__controlador = controlador
+        
+    def iniciarSesion(self):
 
-        usuario = self.nombre_usuario_campo.text()
-        contrasena = self.contrasena_campo.text()
-        # esta informacion se pasa al controlador
-        resultado = self.__controlador.verificarUsuario(usuario, contrasena)
-        msg = QMessageBox(self)
-        msg.setIcon(QMessageBox.Information)
-        msg.setWindowTitle("Resultado")
+            usuario = self.nombre_usuario_campo.text()
+            contrasena = self.contrasena_campo.text()
+            # esta informacion se pasa al controlador
+            resultado = self.__controlador.verificarUsuario(usuario, contrasena)
+            msg = QMessageBox(self)
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Resultado")
 
-        if resultado is None:
+            if resultado is None:
 
-            self.verMenu()
+                self.verMenu()
 
-        else:
+            else:
 
-            msg.setText(resultado)
-            msg.show()
+                msg.setText(resultado)
+                msg.show()
+                self.nombre_usuario_campo.clear()
+                self.contrasena_campo.clear()
+                
+    def verMenu(self):
+
             self.nombre_usuario_campo.clear()
             self.contrasena_campo.clear()
-            
-def verMenu(self):
-
-        self.nombre_usuario_campo.clear()
-        self.contrasena_campo.clear()
-        ventana_nueva = VentanaMenu(self)
-        ventana_nueva.asignarControlador(self.__controlador)
-        ventana_nueva.agregarNombre()
-        self.hide()
-        ventana_nueva.show()
+            ventana_nueva = VentanaMenu(self)
+            ventana_nueva.asignarControlador(self.__controlador)
+            ventana_nueva.agregarNombre()
+            self.hide()
+            ventana_nueva.show()
     
 class VentanaMenu(QDialog): 
 
