@@ -149,7 +149,7 @@ class Sistema:
 
         return self.__datos_paciente
         
-     def obtenerImagenContrastada(self):
+    def obtenerImagenContrastada(self):
 
         imagen_normalizada = self.__dicom_array/np.max(self.__dicom_array)
 
